@@ -262,7 +262,10 @@ gsutil -m cp gs://cloudmile-demo-lcm/happiness.csv gs://${BUCKET}
 6. Test your model with the following text:
 'A strong taste of hazelnut and orange.'
 
+### AutoML Demo 2
 
+Dataset link:
+https://storage.googleapis.com/automl-vision-sports/Archive.zip
 
 
 Portions of this page are reproduced from work created and shared by Google and used according to terms described in the Creative Commons 3.0 Attribution License.
