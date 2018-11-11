@@ -68,9 +68,7 @@ pip install --upgrade google-cloud-vision --user
 ```
 2. Download code sample detect.py 
 ```
-curl 
-https://raw.githubusercontent.com/GoogleCloudPlatform/python-
-docs-samples/master/vision/cloud-client/detect/detect.py -o vision.py
+curl https://raw.githubusercontent.com/GoogleCloudPlatform/python-docs-samples/master/vision/cloud-client/detect/detect.py -o vision.py
 ```
 3. Use the API to get labels
 ```
@@ -87,9 +85,7 @@ pip install --upgrade google-cloud-speech
 ```
 2. Download code sample transcribe.py
 ```
-curl 
-https://raw.githubusercontent.com/GoogleCloudPlatform/python-
-docs-samples/master/speech/cloud-client/transcribe.py -o speech2text.py
+curl https://raw.githubusercontent.com/GoogleCloudPlatform/python-docs-samples/master/speech/cloud-client/transcribe.py -o speech2text.py
 ```
 3. Use the API to get labels
 ```
@@ -119,9 +115,7 @@ pip install --upgrade google-cloud-translate
 ```
 2. Download code sample snippets.py 
 ```
-curl 
-https://raw.githubusercontent.com/GoogleCloudPlatform/python-
-docs-samples/master/translate/cloud-client/snippets.py -o translate.py
+curl https://raw.githubusercontent.com/GoogleCloudPlatform/python-docs-samples/master/translate/cloud-client/snippets.py -o translate.py
 ```
 3. Use the API to get labels
 ```
