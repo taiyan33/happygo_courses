@@ -1,21 +1,6 @@
 # happygo_courses
 Materials and scripts for Happygo courses.
 
-  ```
-  └─happygo_courses
-    │
-    ├─ml_api_intro
-    │      data
-    │      xxx.py
-    │      course.pdf
-    │
-    └─automl_intro
-           data
-           xxx.py
-           course.pdf
-
-  ```
-
 ## Integrating Machine Learning APIs
 
 List the authenticated and active account:
@@ -216,7 +201,66 @@ Use the editor of your choice (nano, vi, etc.) to edit the JSON file.
 }
 ```
 
+## AutoML Vision
+1. Enable the AutoML API.
+2. Setting up Google Cloud project
 
+#### Prepare training data
+
+1. Create an environment variable with the name of your bucket
+```
+export BUCKET=YOUR_BUCKET_NAME
+```
+2. Use gsutil  to copy the training images into your bucket
+```
+gsutil -m cp -r gs://automl-codelab-clouds/* gs://${BUCKET}
+```
+
+#### Create dataset
+
+1. Copy the file to your Cloud Shell instance
+```
+gsutil cp gs://automl-codelab-metadata/data.csv .
+```
+2. Update the CSV with the files in your project
+```
+sed -i -e "s/placeholder/${BUCKET}/g" ./data.csv
+```
+3. Upload this file to your Cloud Storage bucket
+```
+gsutil cp ./data.csv gs://${BUCKET}
+```
+4. Create dataset on AutoML UI.
+
+#### Predict
+
+Use the images in /vision_test_images/ to test your model.
+
+
+
+## AutoML NLP
+
+1. Create GCS bucket.
+```
+gsutil mb -p PROJECT_ID \
+	-c regional	\
+	-l us-central1	\
+	gs://$PROJECT_ID-lcm/
+```
+2. Create an environment variable with the name of your bucket
+```
+export BUCKET=YOUR_BUCKET_NAME
+```
+3. Use gsutil to copy the training data into your bucket
+```
+gsutil -m cp gs://cloudmile-demo-lcm/happiness.csv gs://${BUCKET}
+```
+4. Create dataset through Web UI (Select file gs://$BUCKET-lcm/happiness.csv)
+
+5. Start training
+
+6. Test your model with the following text:
+'A strong taste of hazelnut and orange.'
 
 
 
