@@ -38,6 +38,7 @@ gcloud iam service-accounts create NAME
 gcloud iam service-accounts keys create FILE_NAME.json --iam-account NAME@PROJECT_ID.iam.gserviceaccount.com
 ```
 
+
 ### Set service account
 1. Print current directory
 ```
@@ -59,6 +60,7 @@ export GOOGLE_APPLICATION_CREDENTIALS=PATH_TO_FILE/FILE_NAME.json
 echo $GOOGLE_APPLICATION_CREDENTIALS
 ```
 
+
 ### Cloud Vision API
 1. Install Python client for Cloud Vision
 ```
@@ -76,6 +78,7 @@ python vision.py labels-uri gs://ml-api-codelab/birds.jpg
 ```
 
 The image analyzed is [here](https://storage.googleapis.com/ml-api-codelab/birds.jpg). 
+
 
 ### Cloud Speech API
 1. Install Python client for Cloud Speech-to-Text
@@ -95,6 +98,7 @@ python speech2text.py gs://ml-api-codelab/tr-ostrich.wav
 
 The audio file analyzed is [here](https://storage.googleapis.com/ml-api-codelab/tr-ostrich.wav). 
 
+
 #### Error!
 
 google.api_core.exceptions.InvalidArgument: 400 sample_rate_hertz (16000) in RecognitionConfig must either be omitted or match the value in the WAV header ( 22050).
@@ -106,6 +110,7 @@ google.api_core.exceptions.InvalidArgument: 400 sample_rate_hertz (16000) in Rec
 ```
 config = types.RecognitionConfig(language_code='tr-TR')
 ```
+
 
 ### Cloud Translation API
 1. Install Python client for Cloud Translation
@@ -125,6 +130,7 @@ python translate.py translate-text en '你有沒有帶外套'
 
 The translation should be "Do you have a jacket?".
 
+
 ### Cloud Natural Language
 1. Install Python client for Cloud Translation
 ```
@@ -140,6 +146,82 @@ python natural_language.py entities-text 'where did you leave my bike'
 ```
 
 The API should identify "bike" as an entity.
+
+
+### Cloud Video Intelligence 
+
+#### Service Account
+
+1. Create service-account
+```
+gcloud iam service-accounts create NAME
+```
+2. Generate and download service-account key
+```
+gcloud iam service-accounts keys create FILE_NAME.json --iam-account NAME@PROJECT_ID.iam.gserviceaccount.com
+```
+
+#### Set up authorization
+
+1. Authenticate your service account
+```
+gcloud auth activate-service-account --key-file FILE_NAME.json
+```
+2. Obtain an authorization token key
+```
+gcloud auth print-access-token
+```
+
+#### Create a request file
+
+Use the editor of your choice (nano, vi, etc.) to create a JSON request file.
+```
+{
+   "inputUri":"gs://cloud-ml-sandbox/video/chicago.mp4",
+   "features": [
+       "LABEL_DETECTION"
+   ]
+}
+```
+#### Make an annotate video request
+
+1. Use curl to make a videos:annotate request
+2. Replace the ACCESS_TOKEN
+```
+curl -s -H 'Content-Type: application/json' \
+    -H 'Authorization: Bearer ACCESS_TOKEN' \
+    'https://videointelligence.googleapis.com/v1/videos:annotate' \
+    -d @request.json
+```
+
+Output:
+```
+{  
+  "name": "asia-east1.4977238832208428291"
+}
+```
+#### Make an annotate video request
+
+1. Replace the ACCESS_TOKEN
+2. Replace the OPERATION_NAME with the name you just received.
+```
+curl -s -H 'Content-Type: application/json' \
+    -H 'Authorization: Bearer ACCESS_TOKEN' \
+    'https://videointelligence.googleapis.com/v1/operations/OPERATION_NAME'
+```
+
+#### Try another video...
+
+Use the editor of your choice (nano, vi, etc.) to edit the JSON file.
+```
+{
+   "inputUri":"gs://demomaker/cat.mp4",
+   "features": [
+       "LABEL_DETECTION"
+   ]
+}
+```
+
 
 
 
